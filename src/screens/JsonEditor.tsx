@@ -31,9 +31,9 @@ const JsonEditor: React.FC = () => {
                 <Button text='Preety Print' onClick={formatJson} styles={{size: "base", rounded: "lg", theme: "normal", hover: true, spacing: "mr-4"}}/>
                 {/* <Button text='Visualize' onClick={formatJson} styles={{size: "base", rounded: "lg", theme: "normal", hover: true, spacing: "mr-4"}}/> */}
             </div>
-            <div className='min-w-full flex flex-row grow'>
+            <div className='min-w-full flex flex-col lg:flex-row grow lg:max-h-[37rem]'>
                 <JsonTextArea json={json} setJson={setJson} readOnly={false}/>
-                <div className='min-w-4'></div>
+                <div className='min-h-4 lg:min-w-4'></div>
                 <JsonTextArea json={formattedJson} setJson={()=>{}} readOnly={true}/>
             </div>
             <div>{error}</div>

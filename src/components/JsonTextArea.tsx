@@ -1,36 +1,38 @@
-import { useEffect, useRef } from "react";
+import React from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { EditorView } from "@codemirror/view";
 
 type JsonTextAreaProps = {
-    json: string,
-    setJson: Function,
-    readOnly: boolean
+  json: string;
+  setJson: Function;
+  readOnly: boolean;
 };
 
 const JsonTextArea: React.FC<JsonTextAreaProps> = ({ json, setJson, readOnly }) => {
+  const onChange = React.useCallback((val: string) => {
+    setJson(val);
+  }, []);
 
-    const line_indexes = useRef<HTMLDivElement>(null)
-
-    useEffect(()=>{
-        if (line_indexes.current) {
-            const lines = json.split('\n').length;
-            line_indexes.current.innerHTML = Array.from({ length: lines }, (_, i) => i + 1)
-                .join('<br>');
-        }
-    }, [json])
-
-    return (
-        <div className="grow flex overflow-auto">
-            <div className='grow relative border-gray-200 border-solid border-2 py-2 pl-10'>
-                <div className="absolute flex justify-center top-0 left-0 py-2 min-w-8 mr-2 bg-gray-100 text-gray-700 min-h-full" ref={line_indexes}></div>
-                <textarea
-                    className='w-full h-full focus:outline-none resize-none'
-                    value={json}
-                    onChange={(e) => setJson(e.target.value)}
-                    readOnly={readOnly}
-                />
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="grow flex w-full lg:w-full lg:max-h-full max-h-96 overflow-auto">
+      <CodeMirror
+        className="h-full min-w-full max-w-full"
+        basicSetup={{
+          lineNumbers: true,
+          foldGutter: true,
+        }}
+        value={json}
+        height="100%"
+        extensions={[
+          javascript({ jsx: true }),
+          EditorView.lineWrapping,
+        ]}
+        onChange={onChange}
+        editable={!readOnly}
+      />
+    </div>
+  );
+};
 
 export default JsonTextArea;

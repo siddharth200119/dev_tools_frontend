@@ -46,8 +46,8 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className='flex flex-col lg:flex-row'>
-      <div className='flex flex-row lg:flex-col justify-center lg:justify-start items-center w-dvw lg:w-56 bg-gray-700 min-h-14 lg:h-dvh px-4 lg:pt-5'>
+    <div className='flex flex-col lg:flex-row max-h-screen'>
+      <div className='flex flex-row lg:flex-col justify-center lg:justify-start items-center w-dvw lg:min-w-56 lg:max-w-56 bg-gray-700 min-h-14 lg:h-dvh px-4 lg:pt-5'>
         <HamburgerMenu sidebar_items={sidebar_items} />
         <div className='text-gray-100 text-xl lg:text-2xl font-semibold lg:font-bold mx-auto'>{title}</div>
         <div className='hidden lg:flex flex-col lg:mt-10 max-w-44'>
