@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import HamburgerMenu from '../components/HamburgerMenu';
 import { SidebarItem } from '../types/sidebarItem';
 import SidebarComponent from '../components/SidebarComponent';
@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
 
   const location = useLocation();
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1024);
-  const defaultTitle:string = "DevTools Hub";
+  const defaultTitle: string = "DevTools Hub";
   const [title, setTitle] = useState<string>(defaultTitle)
   const sidebar_items: SidebarItem[] = [
     {
@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
           setTitle(item.title);
         }
       });
-    }else{
+    } else {
       setTitle(defaultTitle);
     }
   }, [isMobile, location.pathname]);
@@ -46,18 +46,26 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className='flex flex-col lg:flex-row max-h-screen'>
-      <div className='flex flex-row lg:flex-col justify-center lg:justify-start items-center w-dvw lg:min-w-56 lg:max-w-56 bg-gray-700 min-h-14 lg:h-dvh px-4 lg:pt-5'>
+    <div className="grid grid-cols-12 max-h-screen min-h-full">
+      {/* Sidebar */}
+      <div className="col-span-12 lg:col-span-2 bg-gray-700 flex flex-row lg:flex-col justify-center lg:justify-start items-center min-h-14 lg:h-screen px-4 lg:pt-5">
         <HamburgerMenu sidebar_items={sidebar_items} />
-        <div className='text-gray-100 text-xl lg:text-2xl font-semibold lg:font-bold mx-auto'>{title}</div>
-        <div className='hidden lg:flex flex-col lg:mt-10 max-w-44'>
-          {sidebar_items.map((item, index) => {
-            return <SidebarComponent key={index} title={item.title} component={item.component} />
-          })}
+        <div className="text-gray-100 text-xl lg:text-2xl font-semibold lg:font-bold mx-auto">
+          {title}
+        </div>
+        <div className="hidden lg:flex flex-col lg:mt-10 max-w-44">
+          {sidebar_items.map((item, index) => (
+            <SidebarComponent key={index} title={item.title} component={item.component} />
+          ))}
         </div>
       </div>
-      <Outlet/>
+
+      {/* Content */}
+      <div className="col-span-12 lg:col-span-10">
+        <Outlet />
+      </div>
     </div>
+
   );
 };
 

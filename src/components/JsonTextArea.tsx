@@ -15,23 +15,21 @@ const JsonTextArea: React.FC<JsonTextAreaProps> = ({ json, setJson, readOnly }) 
   }, []);
 
   return (
-    <div className="grow flex w-full lg:w-full lg:max-h-full max-h-96 overflow-auto">
-      <CodeMirror
-        className="h-full min-w-full max-w-full"
-        basicSetup={{
-          lineNumbers: true,
-          foldGutter: true,
-        }}
-        value={json}
-        height="100%"
-        extensions={[
-          javascript({ jsx: true }),
-          EditorView.lineWrapping,
-        ]}
-        onChange={onChange}
-        editable={!readOnly}
-      />
-    </div>
+    <CodeMirror
+      className="h-full min-w-full max-w-full"
+      basicSetup={{
+        lineNumbers: true,
+        foldGutter: true,
+      }}
+      value={json}
+      height="100%"
+      extensions={[
+        javascript({ jsx: true }),
+        EditorView.lineWrapping,
+      ]}
+      onChange={onChange}
+      editable={!readOnly}
+    />
   );
 };
 
