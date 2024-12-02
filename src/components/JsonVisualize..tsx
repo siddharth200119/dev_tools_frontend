@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ArcherContainer, ArcherElement } from 'react-archer';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 
 type JsonVisualizeProps = {
     json: string;
